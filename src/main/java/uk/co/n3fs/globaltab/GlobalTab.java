@@ -15,7 +15,7 @@ import java.nio.file.Path;
 import java.util.HashMap;
 import java.util.Map;
 
-@Plugin(id = "globaltab-n3fs", name = "GlobalTabN3FS", version = "2.0", description = "A tab list plugin for Velocity", authors = {"Aang23", "md678685"})
+@Plugin(id = "globaltab-n3fs", name = "GlobalTabN3FS", version = "PLUGIN_VERSION", description = "A tab list plugin for Velocity", authors = {"Aang23", "md678685"})
 public class GlobalTab {
 
     public static Map<String, Double> playerBalances = new HashMap<String, Double>();
