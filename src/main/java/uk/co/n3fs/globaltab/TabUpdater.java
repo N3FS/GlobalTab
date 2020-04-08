@@ -1,12 +1,12 @@
 package uk.co.n3fs.globaltab;
 
-import java.util.*;
-
 import com.velocitypowered.api.proxy.Player;
 import com.velocitypowered.api.proxy.ProxyServer;
 import com.velocitypowered.api.proxy.player.TabList;
 import com.velocitypowered.api.proxy.player.TabListEntry;
 import com.velocitypowered.api.util.GameProfile;
+
+import java.util.*;
 
 public class TabUpdater implements Runnable {
 
@@ -18,6 +18,28 @@ public class TabUpdater implements Runnable {
         this.plugin = plugin;
         this.server = plugin.server;
         formatter = new TabEntryFormatter(plugin);
+    }
+
+    // I have no idea why this is needed - it might not be needed at all?
+    private static void insertEntry(TabList list, TabListEntry entry, List<UUID> toKeep) {
+        UUID inUUID = entry.getProfile().getId();
+        List<UUID> existingEntries = new ArrayList<UUID>();
+        Map<UUID, TabListEntry> cache = new HashMap<UUID, TabListEntry>();
+        for (TabListEntry current : list.getEntries()) {
+            existingEntries.add(current.getProfile().getId());
+            cache.put(current.getProfile().getId(), current);
+        }
+        if (!existingEntries.contains(inUUID)) {
+            list.addEntry(entry);
+            toKeep.add(inUUID);
+        } else {
+            TabListEntry currentEntr = cache.get(inUUID);
+            if (!currentEntr.getDisplayName().equals(entry.getDisplayName())) {
+                list.removeEntry(inUUID);
+                list.addEntry(entry);
+            }
+            toKeep.add(inUUID);
+        }
     }
 
     @Override
@@ -61,28 +83,6 @@ public class TabUpdater implements Runnable {
                         formatter.formatCustomTab(plugin.getSettings().getFooter(), currentPlayer));
             }
         }
-    }
-
-    // I have no idea why this is needed - it might not be needed at all?
-    private static void insertEntry(TabList list, TabListEntry entry, List<UUID> toKeep) {
-        UUID inUUID = entry.getProfile().getId();
-        List<UUID> existingEntries = new ArrayList<UUID>();
-        Map<UUID, TabListEntry> cache = new HashMap<UUID, TabListEntry>();
-        for (TabListEntry current : list.getEntries()) {
-            existingEntries.add(current.getProfile().getId());
-            cache.put(current.getProfile().getId(), current);
-        }
-        if (!existingEntries.contains(inUUID)) {
-            list.addEntry(entry);
-            toKeep.add(inUUID);
-        } else {
-            TabListEntry currentEntr = cache.get(inUUID);
-            if (!currentEntr.getDisplayName().equals(entry.getDisplayName())) {
-                list.removeEntry(inUUID);
-                list.addEntry(entry);
-			}
-			toKeep.add(inUUID);
-		}
     }
 
 }

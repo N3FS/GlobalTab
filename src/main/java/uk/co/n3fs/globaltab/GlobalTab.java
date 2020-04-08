@@ -18,12 +18,11 @@ import java.util.Map;
 @Plugin(id = "globaltab-n3fs", name = "GlobalTabN3FS", version = "2.0", description = "A tab list plugin for Velocity", authors = {"Aang23", "md678685"})
 public class GlobalTab {
 
+    public static Map<String, Double> playerBalances = new HashMap<String, Double>();
     ProxyServer server;
-    private Logger logger;
     ConfigManager configManager;
     LuckPerms lpApi;
-
-    public static Map<String, Double> playerBalances = new HashMap<String, Double>();
+    private Logger logger;
     private GlobalTabScheduler scheduler;
 
     @Inject
@@ -62,5 +61,6 @@ public class GlobalTab {
 
     ConfigManager.Settings getSettings() {
         return configManager.getSettings();
-    };
+    }
+
 }

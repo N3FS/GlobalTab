@@ -48,7 +48,7 @@ public class GlobalTabListener {
         String subChannel = in.readUTF();
 
         if (subChannel.equals("Balance")) {
-            String packet[] = in.readUTF().split(":");
+            String[] packet = in.readUTF().split(":");
             String username = packet[0];
             Double balance = Double.parseDouble(packet[1]);
             if (GlobalTab.playerBalances.containsKey(username)) {
