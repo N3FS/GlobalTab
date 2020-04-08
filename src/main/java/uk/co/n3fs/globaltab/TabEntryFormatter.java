@@ -72,7 +72,10 @@ public class TabEntryFormatter {
         if (isLPAvailable()) {
             User lpUser = LuckPermsProvider.get().getUserManager().getUser(username);
             if (lpUser != null) {
-                return lpUser.getCachedData().getMetaData(QueryOptions.defaultContextualOptions()).getPrefix();
+                String prefix = lpUser.getCachedData().getMetaData(QueryOptions.defaultContextualOptions()).getPrefix();
+                if (prefix != null) {
+                    return prefix;
+                }
             }
         }
         return "";
@@ -82,7 +85,10 @@ public class TabEntryFormatter {
         if (isLPAvailable()) {
             User lpUser = LuckPermsProvider.get().getUserManager().getUser(username);
             if (lpUser != null) {
-                return lpUser.getCachedData().getMetaData(QueryOptions.defaultContextualOptions()).getSuffix();
+                String suffix = lpUser.getCachedData().getMetaData(QueryOptions.defaultContextualOptions()).getSuffix();
+                if (suffix != null) {
+                    return suffix;
+                }
             }
         }
         return "";
