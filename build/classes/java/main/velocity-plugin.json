@@ -1,1 +1,1 @@
-{"id":"globaltab","name":"GlobalTab","version":"1.0","description":"A plugin","authors":["Aang23"],"dependencies":[],"main":"com.aang23.globaltab.GlobalTab"}
+{"id":"globaltab-n3fs","name":"GlobalTabN3FS","version":"2.0","description":"A tab list plugin for Velocity","authors":["Aang23","md678685"],"dependencies":[],"main":"uk.co.n3fs.globaltab.GlobalTab"}

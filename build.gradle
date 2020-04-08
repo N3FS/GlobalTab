@@ -4,8 +4,8 @@ plugins {
     id 'com.github.johnrengelman.shadow' version '4.0.4'
 }
 
-group 'com.aang23'
-version '1.0'
+group 'uk.co.n3fs'
+version '2.0.0-alpha1'
 
 sourceCompatibility = 1.8
 
@@ -15,11 +15,19 @@ repositories {
         name = 'velocity'
         url = 'https://repo.velocitypowered.com/snapshots/'
     }
+    maven {
+        name = 'sponge'
+        url = 'https://repo.spongepowered.org/maven/'
+    }
 }
 
 dependencies {
     compileOnly 'com.velocitypowered:velocity-api:1.0.5-SNAPSHOT'
     compileOnly 'net.luckperms:api:5.0'
-    compile group: 'com.googlecode.json-simple', name: 'json-simple', version: '1.1'
-    compile group: 'com.cedarsoftware', name: 'json-io', version: '4.5.0'
+    compile 'org.spongepowered:configurate-hocon:3.6.1'
+}
+
+shadowJar {
+    relocate 'ninja.leaping.configurate', 'uk.co.n3fs.globaltab.configurate'
+    relocate 'com.typesafe.config', 'uk.co.n3fs.globaltab.typesafe.config'
 }
